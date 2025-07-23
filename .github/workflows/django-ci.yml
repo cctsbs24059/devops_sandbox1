@@ -66,7 +66,7 @@ jobs:
          id: meta
          uses: docker/metadata-action@v5
          with:
-           images: ghcr.io/cctsbs24059/devops
+           images: ghcr.io/cctsbs24059/devops_sandbox1
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
