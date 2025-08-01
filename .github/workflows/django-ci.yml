@@ -67,6 +67,8 @@ jobs:
          uses: docker/metadata-action@v5
          with:
            images: ghcr.io/cctsbs24059/devops_sandbox1
+           # Go to gh repository, settings, secrets and variables, actions,
+           # variables,variable 1: {REGISTRY: ghcr.io}, variable 2: {IMAGE_NAME:cctsbs24059/devops_sandbox1}
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
