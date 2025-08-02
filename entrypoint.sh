@@ -5,13 +5,12 @@
 echo "Waiting for PostgreSQL..."
 
 while ! nc -z "$DATABASE_HOST" 5432; do
-  sleep 0.5
+  sleep 1
 done
 
 echo "PostgreSQL is up — applying migrations"
 python manage.py migrate
 
 echo "Starting Django app"
-exec "$@"
 
-# python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8000
