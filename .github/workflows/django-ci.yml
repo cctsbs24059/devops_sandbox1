@@ -64,16 +64,16 @@ jobs:
         with:
           node-version: '20'
       - name: Run semantic-release
-          id: semantic
-          uses: cycjimmy/semantic-release-action@v4
-          with:
-            extra_pluggins: |
-              @semantic-release/changelog
-              @semantic-release/git
-              @semantic-release/github
-              conventional-changelog-conventionalcommits
-          env:
-            GITHUB_TOKEN: S{{ secrets.GITHUB_TOKEN }}
+        id: semantic
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          extra_pluggins: |
+            @semantic-release/changelog
+            @semantic-release/git
+            @semantic-release/github
+            conventional-changelog-conventionalcommits
+        env:
+          GITHUB_TOKEN: S{{ secrets.GITHUB_TOKEN }}
 
   build-docker-image:
     runs-on: ubuntu-latest
