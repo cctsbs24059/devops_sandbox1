@@ -41,13 +41,45 @@ jobs:
       - name: Run runmigrations
         run: python manage.py makemigrations --check
 
+  semantic-release:
+    runs-on: ubuntu-latest
+    needs:
+      -test
+      runmigrations
+      migrations-check
+    if: github.ref == 'refs/heads/main'
+    outputs:
+      new-release-published: ${{ steps.semantic.outputs.new_release_published }}
+      new-release-version: ${{ steps.semantic.outputs.new_release_version }}
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          mode-version: '20'
+      - name: Run semantic-release
+          id: semantic
+          uses: cycjimmy/semantic-releae-action@v4
+          with:
+            extra_pluggins: |
+              @semantic-release/changelog
+              @semantic-release/git
+              @semantic-release/github
+              conventional-changelog-conventionalcommits
+          env:
+            GITHUB_TOKEN: S{{ secrets.GITHUB_TOKEN }}
+
   build-docker-image:
     runs-on: ubuntu-latest
     needs:
-      - test
-      - runmigrations
-      - migrations-check
-    if: github.ref == 'refs/heads/main'
+      - semantic-release
+    if: github.ref == 'refs/heads/main' && needs.semantic-release.outputs.new_release_published == 'true'
     permissions:
       contents: read
       packages: write
@@ -67,6 +99,9 @@ jobs:
          uses: docker/metadata-action@v5
          with:
            images: ghcr.io/cctsbs24059/devops_sandbox1
+           tags: |
+            type=semver,pattern={{version}},value=v${{ needs.semantic-release.outputs.new_release_version}}
+
            # Go to gh repository, settings, secrets and variables, actions,
            # variables,variable 1: {REGISTRY: ghcr.io}, variable 2: {IMAGE_NAME:cctsbs24059/devops_sandbox1}
       - name: Build and push
