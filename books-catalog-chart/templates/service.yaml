@@ -4,7 +4,35 @@ metadata:
   name: {{ include "books-catalog-chart.fullname" . }}
   labels:
     {{- include "books-catalog-chart.labels" . | nindent 4 }}
-spec:
+spec:{
+    "branches": [
+        "main"
+    ],
+    "plugins": [
+        [
+            "@semantic-release/commit-analyser",
+            {
+                "preset": "conventionalcommits"
+            }
+        ],
+        [
+            "@semantic-release/release-notes-generator",
+            {
+                "changelogFile": "CHANGELOG.md"
+            }
+        ],
+        "@semantic-release/github",
+        [
+            "@semantic-release/git",
+            {
+                "assets": [
+                    "CHANGELOG.md"
+                ],
+                "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+            }
+        ]
+    ]
+}
   type: ClusterIP
   ports:
     - port: 80
