@@ -73,7 +73,7 @@ jobs:
             @semantic-release/github
             conventional-changelog-conventionalcommits
         env:
-          GITHUB_TOKEN: S{{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-docker-image:
     runs-on: ubuntu-latest
