@@ -52,3 +52,8 @@ class BookAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Book.objects.count(), 0)
 
+class HealthViewTest(APITestCase):
+    def test_health_check_returns_ok(self):
+        response = self.client.get(reverse('api:health'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'ok')
