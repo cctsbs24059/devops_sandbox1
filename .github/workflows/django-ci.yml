@@ -132,4 +132,4 @@ jobs:
           value: ${{ needs.semantic-release.outputs.new_release_version }}
           branch: main
           commitChange: true
-          message: "chore: Deploy image version ${{ needs.semantic-release.outputs.new_release_version }} to production [skip ci]"
+          message: "chore: Deploy image version to production [skip ci]"
