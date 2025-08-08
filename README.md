@@ -68,4 +68,4 @@ Argo CD automatically syncs changes.
 
 9. Author:
 
-Your Name – @cctsbs24059
+@cctsbs24059
