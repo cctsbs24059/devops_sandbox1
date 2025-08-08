@@ -1,8 +1,8 @@
-Book Catalog API
+📚 Book Catalog API
 
 A Django REST Framework–based API for managing a catalog of books, integrated with a CI/CD pipeline using GitHub Actions, containerized with Docker, and deployable on Kubernetes (via K3d) with GitOps workflow automation using Argo CD.
 
-1. Features:
+🚀 Features
 
 RESTful CRUD API for managing books.
 
@@ -18,15 +18,15 @@ Kubernetes deployment via Helm.
 
 GitOps continuous delivery with Argo CD.
 
-2. Tech Stack:
+🛠 Tech Stack
 
 Django, Django REST Framework, Pytest, PostgreSQL, Docker, Kubernetes (K3d), Argo CD, GitHub Actions.
 
-Project Structure
+📂 Project Structure
 
 api/ (models, views, serializers, tests), bookcatalog/ (settings), envs/prod/values.yaml (Helm values), requirements.txt, Dockerfile, docker-compose.yml, entrypoint.sh, README.md.
 
-3. Installation & Local Setup:
+⚙️ Installation & Local Setup
 
 git clone https://github.com/<your-username>/<repo-name>.git
 cd <repo-name>
@@ -36,17 +36,17 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 
-4. Running with Docker:
+🐳 Running with Docker
 
 docker-compose up --build
 
 Access at http://localhost:8000/api/books/
 
-5. API Endpoints:
+🔗 API Endpoints
 
 GET /api/books/ – List all books, POST /api/books/ – Create book, GET /api/books/{id}/ – Retrieve book, PUT /api/books/{id}/ – Update book, DELETE /api/books/{id}/ – Delete book, GET /api/health/ – Health check, GET /api/test/ – Test endpoint.
 
-6. Running Tests:
+🧪 Running Tests
 
 pytest
 
@@ -54,11 +54,11 @@ Or:
 
 python manage.py test
 
-7. CI/CD Pipeline:
+⚡ CI/CD Pipeline
 
 Runs tests, validates migrations, performs semantic release, builds and pushes Docker image to GHCR, updates Helm values for deployment.
 
-8. Kubernetes Deployment (K3d):
+☸️ Kubernetes Deployment (K3d)
 
 k3d cluster create devops
 helm upgrade --install books-catalog-api ./charts/books-catalog-api
@@ -66,6 +66,6 @@ helm upgrade --install books-catalog-api ./charts/books-catalog-api
 Argo CD automatically syncs changes.
 
 
-9. Author:
+👤 Author
 
 @cctsbs24059
